@@ -6,6 +6,7 @@ def shoot(self):
     vec = mathutils.Vector((0, 1, 0)) 
     sender = obj
     previous = obj.worldPosition
+    lastHitObject = obj
     
     while True: 
         mirror, location, normal = sender.rayCast(sender.worldPosition + vec, None, 60)
@@ -14,6 +15,7 @@ def shoot(self):
         previous = location
         
         if mirror != None and mirror.name.find("Mirror") != -1:
+            lastHitObject = mirror
             vec = vec.reflect(normal)
             print(mirror)
             sender = mirror
@@ -22,4 +24,5 @@ def shoot(self):
             print("Reached end")
             #print(mirror) 
             break
-
+    print("Last Hit Object:")
+    print(lastHitObject)
